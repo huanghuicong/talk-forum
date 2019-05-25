@@ -1,0 +1,563 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <title>侃侃</title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <link rel="stylesheet" href="../static/layui/css/layui.css"  media="all">
+    <link rel="stylesheet" href="../static/css/kkmain.css"  media="all">
+    <link rel="stylesheet" href="../static/css/rest.css"  media="all">
+    <link rel="stylesheet" href="../static/css/jquery.page.css"  media="all">
+    <link rel="stylesheet" href="../static/css/jquery.pagination.css"  media="all">
+
+    <script language="javascript" src="../static/js/jquery-3.3.1.js"></script>
+    <script language="javascript" src="../static/js/jquery.page.js"></script>
+    <script language="javascript" src="../static/js/jquery.pagination.js"></script>
+    <script language="javascript" src="../static/layui/layui.js" charset="utf-8"></script>
+  </head>
+  <style>
+.App-main{
+    padding-top: 60px;
+}
+.App-main, .Topstory {
+    display: block;
+}
+.Topstory-container {
+    display: flex;
+    align-items: flex-start;
+    width: 1032px;
+    padding: 0 16px;
+    margin: 10px auto;
+}
+.Topstory-mainColumn {
+    flex-shrink: 0;
+    margin-right: 10px;
+    margin-bottom: 0;
+    width: 694px;
+}
+.Topstory-content {
+    min-height: 100vh;
+}
+.Topstory-mainColumn .Card {
+    margin-bottom: 0;
+    box-shadow: none;
+    border-bottom: 1px solid #F0F2F7;
+}
+.TopstoryItem-isRecommend {
+    padding: 20px;
+}
+.TopstoryItem {
+    position: relative;
+    padding: 16px 20px;
+}
+.Card {
+    margin-bottom: 10px;
+    background: #FFFFFF;
+    overflow: hidden;
+    border-radius: 2px;
+    box-shadow: 0 1px 3px rgba(26, 26, 26, 0.1);
+    box-sizing: border-box;
+}
+a {
+    color: inherit;
+    text-decoration: none!important;
+}
+a:-webkit-any-link {
+    color: -webkit-link;
+    cursor: pointer;
+    text-decoration: underline;
+}
+.Advert-title {
+    font-size: 18px;
+    font-weight: 600;
+    font-synthesis: style;
+    color: #1A1A1A;
+}
+h1, h2, h3 {
+    margin: 0;
+    font: inherit;
+}
+h2 {
+    display: block;
+    font-size: 1.5em;
+    margin-block-start: 0.83em;
+    margin-block-end: 0.83em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    font-weight: bold;
+    text-decoration: none!important;
+}
+.Advert-content--cover, .Advert-content--question {
+    display: flex;
+}
+.Advert-content {
+    margin-top: 10px;
+}
+.Advert--card-cover {
+    width: 200px;
+    height: 112px;
+    margin-top: 4px;
+    border-radius: 4px;
+    overflow: hidden;
+    background: #999999;
+    vertical-align: top;
+}
+.Advert--card-detail {
+    flex: 1;
+    margin-left: 20px;
+    line-height: 24px;
+}
+.Advert-description {
+    line-height: 27px;
+    margin-top: 6px;
+    color: #1A1A1A;
+}
+.ztext {
+    word-break: break-word;
+    line-height: 1.6;
+    color: #1A1A1A;
+}
+.Advert-button {
+    display: inline-block;
+    color: #8590A6;
+    font-size: 14px;
+    padding: 0 3px;
+}
+.ContentItem-actions {
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    margin: 0 -20px -10px;
+    color: #646464;
+    background: #FFFFFF;
+    clear: both;
+}
+@media (min-width: 690px)
+.RichContent.is-collapsed {
+    cursor: pointer;
+    transition: color 140ms ease-out;
+}
+
+.RichContent {
+    line-height: 1.67;
+}
+.TopstoryItem .Button:not(.Button--plain):not(.Button--link) {
+    line-height: 30px;
+    padding: 0 12px;
+}
+.VoteButton {
+    padding: 0 10px;
+    color: #0084FF;
+    background: rgba(0, 132, 255, 0.1);
+    border-color: transparent;
+}
+.Button {
+    display: inline-block;
+    padding: 0 16px;
+    font-size: 14px;
+    line-height: 32px;
+    color: #8590A6!important;
+    text-align: center;
+    cursor: pointer;
+    background: none;
+    border: 1px solid;
+    border-radius: 3px;
+}
+button {
+    margin: 0;
+    padding: 0;
+    font: inherit;
+    color: inherit;
+    cursor: pointer;
+    background: none;
+    border: none;
+    outline: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+.VoteButton--down {
+    margin-left: 4px;
+}
+.TopstoryItem .Button:not(.Button--plain):not(.Button--link) {
+    line-height: 30px;
+    padding: 0 12px;
+}
+.Button--withIcon.Button--plain, .Button--withIcon.Button--link {
+    padding: 0;
+}
+.ContentItem-action {
+    margin-left: 24px;
+    font-size: 14px;
+}
+
+.Button--plain, .Button--link {
+    height: auto;
+    padding: 0;
+    line-height: inherit;
+    background-color: transparent;
+    border: none;
+    border-radius: 0;
+}
+.RichContent-cover {
+    position: relative;
+    width: 190px;
+    height: 105px;
+    margin-top: -2px;
+    margin-right: 18px;
+    margin-bottom: 4px;
+    float: left;
+    overflow: hidden;
+    background-position: center;
+    background-size: cover;
+    border-radius: 4px;
+    -webkit-transform: translate3d( 0, 0, 0 );
+    transform: translate3d( 0, 0, 0 );
+}
+.RichContent.is-collapsed .RichContent-inner {
+    max-height: 100px;
+}
+.RichContent-cover + .RichContent-inner {
+    margin-top: 16px;
+}
+.RichContent-inner {
+    margin-top: 9px;
+    margin-bottom: -4px;
+    overflow: hidden;
+}
+.GlobalSideBar {
+    flex: 1;
+    font-size: 14px;
+    color: #1A1A1A;
+    width: 296px;
+}
+.GlobalWrite-nav {
+    display: flex;
+    justify-content: center;
+}
+.GlobalWrite-navItem {
+    align-items: center;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    margin: 23px;
+}
+.GlobalWrite-navIcon {
+    color: #8590A6;
+    margin-bottom: 6px;
+}
+.GlobalSideBar-categoryList {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 20px 0 -5px;
+    padding: 0 10px;
+}
+.GlobalSideBar-categoryItem {
+    width: 33%;
+    display: flex;
+    margin-bottom: 25px;
+}
+
+li {
+    list-style-type: none;
+}
+li {
+    display: list-item;
+    text-align: -webkit-match-parent;
+}
+.GlobalSideBar-categoryItem .Button {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    cursor: pointer;
+    color: currentColor;
+}
+.GlobalSideBar-categoryIcon {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    width: 25px;
+    height: 25px;
+    margin-bottom: 10px;
+}
+.GlobalSideBar-categoryLabel {
+    font-size: 15px;
+    color: #8590A6;
+}
+.GlobalSideBar-navList {
+    width: 100%;
+    padding: 8px 0;
+}
+
+ul, ol {
+    padding: 0;
+    margin: 0;
+}
+.GlobalSideBar-navLink {
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+    height: 40px;
+    overflow: hidden;
+}
+.GlobalSideBar-navIcon {
+    fill: #8590A6;
+}
+.GlobalSideBar .Footer {
+    padding: 0 0 0 5px;
+}
+.Footer {
+    padding: 10px 0 10px 5px;
+    font-size: 13px;
+    line-height: 2;
+    color: #8590A6!important;
+}
+.Footer-item {
+    display: inline-block;
+    color: #8590A6!important;
+}
+.Footer-dot::after {
+    margin: 0 5px;
+    content: '\B7';
+}
+.GlobalWrite-navTitle {
+    color: #8590a6!important;
+    font-size: 16px;
+}
+.GlobalSideBar-navText {
+    flex: 1;
+    margin: 0 10px;
+    text-align: left;
+    color: #8590a6!important;
+}
+.Pc-card {
+    position: relative;
+    box-sizing: border-box;
+    width: 100%;
+    border-radius: 2px;
+    overflow: hidden;
+    transition: height 300ms, margin 300ms, opacity 300ms;
+}
+.Pc-card img {
+    display: block;
+    width: 100%;
+    border-radius: 2px;
+}
+.Pc-card-button-close {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    box-sizing: border-box;
+    width: 18px;
+    height: 18px;
+    padding: 0 2px;
+    border-color: transparent;
+    border-radius: 50%;
+    background-color: #1a1a1a;
+    opacity: 0;
+    transition: opacity .3s;
+}
+.Pc-card-button-close-svg {
+    width: 14px;
+    height: 16px;
+    fill: #fff;
+}
+.Icon {
+    vertical-align: text-bottom;
+    fill: currentColor;
+}
+</style>
+ <body>
+   <div class="layui-nav" style="margin: 0 auto;width: 100%;background-color: #393D49;">
+        <div style="margin: 0 auto;width: 100%;background-color: #393D49;position: fixed;top: 0;left: 0;z-index: 100;">
+            <ul class="layui-nav" style="margin: 0 auto;max-width: 1000px;min-width: 1000px!important;">
+                <li class="layui-nav-item" >
+                  <a href="#" style="font-size:26px;font-family:幼圆;">侃侃</a> 
+                </li>
+                <li class="layui-nav-item" >
+                  <a href="#" style="" onclick="hrefPage('indexPost')">首页</a> 
+                </li>
+                <li class="layui-nav-item">
+                  <a href="#" onclick="hrefPage('topic')">话题</a>
+                </li>
+                 <li class="layui-nav-item" style="">
+                  <a href="http://fly.layui.com/" target="_blank">推荐</a>
+                </li>
+                <li class="layui-nav-item"  style="padding-left:10px;height: 60px;">
+                    <input type="text" name="title" placeholder="发现新鲜事" class="layui-input" style="height:30px;color:black;border-radius:5px;margin-top: 15px;">
+                </li>
+                 <li class="layui-nav-item" style="padding-left:10px;padding-right: 10px;">
+                 <button class="layui-btn layui-btn-normal layui-btn-sm">搜索</button>
+                </li>
+                 
+                <li class="layui-nav-item" style="float:right"> <a href="/user/reg/">注册</a> </li>    
+                <li class="layui-nav-item" style="float:right"> <a href="/user/login/">登入</a></li> 
+               
+            </ul>
+        </div>
+    </div>
+    <!-- 主页面数据 -->
+    <main role="main" class="App-main">
+      <div class="Topstory">
+        <div class="Topstory-container">
+          <div class="Topstory-mainColumn">
+            <div id="TopstoryContent" class="Topstory-content">
+                <!--    首页动态数据 -->
+                <div class="Topstory-recommend">
+                   
+                </div>
+                <div id="page"></div> 
+                <!--    首页动态数据 -->
+            </div>            
+          </div>
+          <div class="GlobalSideBar" data-za-detail-view-path-module="RightSideBar" data-za-extra-module="{&quot;card&quot;:{&quot;content&quot;:null}}">
+            <div>
+                <div class="Sticky" style="">
+                    <div class="Card">
+                        <div class="GlobalWrite">
+                            <div class="GlobalWrite-nav">
+                                <a class="GlobalWrite-navItem" href="/question" target="_blank" rel="noopener noreferrer" title="回答">
+                                    <img src="../static/images/article.png" style="height:30px;width:30px;"/>
+                                    <div class="GlobalWrite-navTitle">写帖子</div>
+                                </a>
+                                <a class="GlobalWrite-navItem" href="//zhuanlan.zhihu.com/write" target="_blank" rel="noopener noreferrer" title="写文章">
+                                    <img src="../static/images/topic.png" style="height:30px;width:30px;"/>
+                                    <div class="GlobalWrite-navTitle">写话题</div>
+                                </a>
+                                <div class="GlobalWrite-navItem">
+                                    <img src="../static/images/mood.png" style="height:30px;width:30px;"/>
+                                    <div class="GlobalWrite-navTitle">写心情</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="Card">
+                        <ul class="GlobalSideBar-categoryList">
+                            <li class="GlobalSideBar-categoryItem"><a href="/lives" target="_blank" title="Live" data-za-not-track-link="true" type="button" class="Button Button--plain" style="color: rgb(255, 207, 0);"><span class="GlobalSideBar-categoryIcon">
+                            <img src="../static/images/hot.png" style="height:30px;width:30px;"/>
+                            </span><span class="GlobalSideBar-categoryLabel">最热</span></a>
+                            </li>
+                            <li class="GlobalSideBar-categoryItem"><a href="/roundtable" target="_blank" title="圆桌" data-za-not-track-link="true" type="button" class="Button Button--plain" style="color: rgb(0, 132, 255);"><span class="GlobalSideBar-categoryIcon">
+                            <img src="../static/images/talk.png" style="height:30px;width:30px;"/>
+                            </span><span class="GlobalSideBar-categoryLabel">讨论</span></a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="Card">
+                        <ul class="GlobalSideBar-navList">
+                            <li class="GlobalSideBar-navItem GlobalSideBar-starItem"><a href="/collections" target="_blank" data-za-not-track-link="true" type="button" class="Button GlobalSideBar-navLink Button--plain"><svg class="Zi Zi--Star GlobalSideBar-navIcon" fill="currentColor" viewBox="0 0 24 24" width="18" height="18"><path d="M5.515 19.64l.918-5.355-3.89-3.792c-.926-.902-.639-1.784.64-1.97L8.56 7.74l2.404-4.871c.572-1.16 1.5-1.16 2.072 0L15.44 7.74l5.377.782c1.28.186 1.566 1.068.64 1.97l-3.89 3.793.918 5.354c.219 1.274-.532 1.82-1.676 1.218L12 18.33l-4.808 2.528c-1.145.602-1.896.056-1.677-1.218z" fill-rule="evenodd"></path></svg><span class="GlobalSideBar-navText">我的收藏</span></a>
+                            </li>
+                            <li class="GlobalSideBar-navItem GlobalSideBar-questionListItem"><a target="_blank" data-za-not-track-link="true" type="button" class="Button GlobalSideBar-navLink Button--plain" href="/people/xuanyu-92/following/questions"><svg class="Zi Zi--HelpBubble GlobalSideBar-navIcon" fill="currentColor" viewBox="0 0 24 24" width="18" height="18"><path d="M5.74 4h12.52c.961 0 1.74.775 1.74 1.73V16.27c0 .955-.779 1.73-1.74 1.73h-3.825l-1.658 2.044a1 1 0 0 1-1.554 0l-1.658-2.044H5.74C4.78 18 4 17.224 4 16.27V5.73C4 4.775 4.778 4 5.74 4zM12 16a.976.976 0 0 0 .705-.287.951.951 0 0 0 .295-.712.954.954 0 0 0-.295-.714A.976.976 0 0 0 12 14a.962.962 0 0 0-.705.295A.961.961 0 0 0 11 15c0 .284.098.522.295.713A.975.975 0 0 0 12 16zm1.278-4.924a36.81 36.81 0 0 0 1.023-.975c.19-.193.354-.422.492-.688.138-.266.207-.575.207-.928 0-.448-.12-.864-.363-1.246a2.517 2.517 0 0 0-1.029-.906C13.164 6.111 12.652 6 12.072 6c-.624 0-1.17.133-1.638.399-.468.265-.824.6-1.068 1.005-.244.405-.366.804-.366 1.2 0 .19.077.368.231.531a.747.747 0 0 0 .567.246c.38 0 .638-.234.774-.703.144-.449.32-.788.528-1.019.208-.23.532-.345.972-.345.376 0 .683.114.921.342.238.229.357.51.357.841 0 .17-.039.328-.117.473a1.782 1.782 0 0 1-.288.396c-.114.118-.3.294-.555.526a9.71 9.71 0 0 0-.696.688c-.172.194-.31.418-.414.673a2.391 2.391 0 0 0-.156.906c0 .278.071.488.213.63a.716.716 0 0 0 .525.211c.4 0 .638-.216.714-.648.044-.203.077-.345.099-.426.022-.081.053-.162.093-.243.04-.081.101-.17.183-.268.082-.098.191-.21.327-.34z" fill-rule="evenodd"></path></svg><span class="GlobalSideBar-navText">我关注的话题</span></a>
+                            </li>
+                            <li class="GlobalSideBar-navItem GlobalSideBar-inviteItem"><a href="/question/invited" target="_blank" data-za-not-track-link="true" type="button" class="Button GlobalSideBar-navLink Button--plain"><svg class="Zi Zi--Invite GlobalSideBar-navIcon" fill="currentColor" viewBox="0 0 24 24" width="18" height="18"><path d="M4 10V8a1 1 0 1 1 2 0v2h2a1 1 0 0 1 0 2H6v2a1 1 0 0 1-2 0v-2H2a1 1 0 0 1 0-2h2zm10.455 2c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4zm-7 6c0-2.66 4.845-4 7.272-4C17.155 14 22 15.34 22 18v1.375c0 .345-.28.625-.625.625H8.08a.625.625 0 0 1-.625-.625V18z" fill-rule="evenodd"></path></svg><span class="GlobalSideBar-navText">我的邀请</span></a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="Pc-card Card">
+                        <a class="Banner-link" href="https://www.baidu.com/" target="_blank" rel="noopener noreferrer">
+                            <img class="Banner-image" src="https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1545978471&di=42049e27dc67c76a5ff1b236c40f429e&src=http://l.b2b168.com/2018/06/06/17/201806061747482765264.png" alt="广告">
+                        </a>
+                        <div class="Pc-card-button-close " data-tooltip="不再显示" data-tooltip-position="bottom"><svg viewBox="0 0 12 12" class="Icon Icon--close Pc-card-button-close-svg "><path fill-rule="evenodd" d="M3 2L2 3l3 3-3 3 1 1 3-3 3 3 1-1-3-3 3-3-1-1-3 3"></path></svg></div>
+                    </div>
+                    <footer class="Footer">
+                        <a class="Footer-item" target="_blank" rel="noopener noreferrer" href="/question/19581624">侃侃指南</a>
+                        <span class="Footer-dot"></span>
+                        <a class="Footer-item" target="_blank" rel="noopener noreferrer" href="/terms">侃侃协议</a>
+                        <span class="Footer-dot"></span>
+                        <a class="Footer-item" target="_blank" rel="noopener noreferrer" href="/term/privacy">侃侃隐私保护指引</a><br>
+                        <a class="Footer-item" target="_blank" href="/app">苏州车头</a>
+                        <span class="Footer-dot"></span>
+                        <a class="Footer-item" target="_blank" href="/app">绿帽子</a>
+                        <span class="Footer-dot"></span>
+                        <a class="Footer-item" target="_blank" rel="noopener noreferrer" href="https://app.mokahr.com/apply/zhihu">闲哥网站</a><br>
+                        <a class="Footer-item" target="_blank" href="/contact">联系我们</a>
+                        <span> © 2018 侃侃</span>
+                    </footer>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <input type="hidden" id="hrefValue" >
+    <input type="text" id="num" >
+    <script>
+    $(function(){
+    	$("#hrefValue").val("indexPost");
+    	queryPageNum();
+    	$(".Topstory-recommend").load("../kkyoung/indexPost.html");
+    	
+	})
+    
+    
+    function hrefPage(value){
+    	$(".Topstory-recommend").load("../kkyoung/"+value+".html");
+    	$("#hrefValue").val(value);
+    	$("#page ul li:eq(0)").click();
+    }
+    
+    function queryPageNum(){
+    	var hrefvalue = $("#hrefValue").val();
+    	var num = 7;
+  	    $.ajax({
+            type:"GET",
+            url:"../kkyoung/"+hrefvalue+"Num.html",
+            dataType:"json",
+            success:function(data){
+          	  $("#num").val(data);
+          	  createFY();
+            }
+        });
+    }
+    
+    function createFY(){
+    	　　　　var pageCount=50;  //分页总数量
+    	      // $("#pagination").pagination(pageCount); //简单初始化方法
+
+
+    	        $("#page").pagination(pageCount,    //分布总数量，必须参数
+    	                 {
+    	　　　　　　　　　　callback: PageCallback,  //PageCallback() 为翻页调用次函数。
+    	                  prev_text: "« 上一页",
+    	                  next_text: "下一页 »",
+    	                  items_per_page:10,
+    	                  num_edge_entries: 2,       //两侧首尾分页条目数
+    	                  num_display_entries: 10,    //连续分页主体部分分页条目数
+    	                  current_page: 0,   //当前页索引
+    	　　　　　　　　　　link_to: "?id=__id__"  //分页的js中会自动把"__id__"替换为当前的数。0　
+    	　　　 });
+
+
+    	function PageCallback(page_index,jq)
+    	{
+    	     $.ajax({   
+    	                type: "POST",  
+    	                dataType: "text",  
+    	                url: '后台处理地址',      //提交到一般处理程序请求数据   
+    	                data: "pageIndex=" + (pageIndex) + "&pageSize=" + pageSize,          //提交两个参数：pageIndex(页面索引)，pageSize(显示条数)           
+    	                success: function(data) {
+    	                           //后台服务返回数据，重新加载数据
+    	                        }  
+    	           }); 
+    	}
+    	
+    	/* var num = $("#num").val();
+    	alert(num);
+    	//查询分页总数
+    	$("#page").Page({
+    		  totalPages: num,//分页总数
+    		  liNums: 9,//分页的数字按钮数(建议取奇数)
+    		  activeClass: 'activP', //active 类样式定义
+    		  callBack : function(page){
+    			  var value = $("#hrefValue").val();
+    			  $(".Topstory-recommend").load("../kkyoung/"+value+".html?pageNum="+page);
+    		  }
+    	     }); */
+    }
+    </script>
+    
+	
+ </body>
+
+</html>
