@@ -17,7 +17,7 @@
 	</sql>
 	 
 	<select id="queryNew"  resultMap="resultMap" >
-		select * from t_news
+		select * from t_news aa
 	</select> 
 	
 	
